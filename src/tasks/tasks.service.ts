@@ -13,21 +13,10 @@ export class TasksService {
     constructor(
         @InjectRepository(TaskRepository)
         private taskRepository: TaskRepository) {}
-    // getTasksWithFilter(filterDTO: GetTasksFilterDTO): Task[] {
-    //     const { search, status } = filterDTO;
 
-    //     let tasks = this.getAllTasks();
-
-    //     if (status)
-    //         tasks = tasks.filter(task => task.status === status);
-
-    //     if (search)
-    //         tasks = tasks.filter(task =>
-    //             (task.description.includes(search) || task.title.includes(search)),
-    //         );
-
-    //     return tasks;
-    // }
+    getTasks(filterDTO: GetTasksFilterDTO) {
+        //
+    }
 
     async createTask(createTaskDTO: CreateTaskDTO): Promise<Task> {
         return this.taskRepository.createTask(createTaskDTO);
