@@ -19,4 +19,12 @@ export class TaskRepository extends Repository<Task> {
         return task;
     }
 
+    async deleteTask(task: Task) {
+        await this.manager.remove(task);
+    }
+
+    async _save(task) {
+        return await this.manager.save(task);
+    }
+
 }

@@ -41,14 +41,14 @@ export class TasksService {
         return found;
     }
 
-    // updateTaskStatus(id: string, status: TaskStatus): Task {
-    //     const task = this.getTaskById(id);
-    //     task.status = status;
-    //     return task;
-    // }
+    async updateTaskStatus(id: number, status: TaskStatus): Promise<Task> {
+        const task = await this.getTaskById(id);
+        task.status = status;
+        return this.taskRepository._save(task);
+    }
 
-    // deleteTaskById(id: string): void {
-    //     const found = this.getTaskById(id);
-    //     this.tasks = this.tasks.filter(task => task.id !== found.id);
-    // }
+    async deleteTaskById(id: number): Promise<void> {
+        const found = await this.getTaskById(id);
+        this.taskRepository.deleteTask(found);
+    }
 }
