@@ -8,6 +8,8 @@ const mockUser = { id: 2, username: 'andre' };
 const mockTaskRepository = () => ({
     getTasks: jest.fn(),
     findOne: jest.fn(),
+    createTask: jest.fn(),
+    delete: jest.fn(),
 });
 
 describe('TaskService', () => {
@@ -55,6 +57,23 @@ describe('TaskService', () => {
         it('throw an error as task is not found', () => {
             taskRepository.findOne.mockResolvedValue(null);
             expect(taskService.getTaskById(1, mockUser)).rejects.toThrow();
+        });
+    });
+
+    describe('createTask', () => {
+        it('calls taskRepository.createTask() and return the result', async () => {
+            expect(taskRepository.createTask).not.toHaveBeenCalled();
+            const createTaskDTO = { title: 'Task one', description: 'Some description' };
+            const result = await taskService.createTask(createTaskDTO, mockUser);
+            expect(taskRepository.createTask).toHaveBeenCalledWith(createTaskDTO, mockUser);
+        });
+    });
+
+    describe('deleteTask', () => {
+        it('calls taskRepository.deleteTaskById() to delete a task', async () => {
+            expect(taskRepository.delete).not.toHaveBeenCalled();
+            await taskService.deleteTaskById(1, mockUser);
+            expect(taskRepository.delete).toHaveBeenCalledWith({ id: 1, userId: mockUser.id });
         });
     });
 });
