@@ -10,7 +10,6 @@ import { User } from 'src/auth/user.entity';
 
 @Injectable()
 export class TasksService {
-    private entityManager = getManager();
     constructor(
         @InjectRepository(TaskRepository)
         private taskRepository: TaskRepository) {}
