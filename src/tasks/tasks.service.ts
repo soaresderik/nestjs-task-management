@@ -37,8 +37,8 @@ export class TasksService {
         return this.taskRepository._save(task);
     }
 
-    // async deleteTaskById(id: number): Promise<void> {
-    //     const found = await this.getTaskById(id);
-    //     this.taskRepository.deleteTask(found);
-    // }
+    async deleteTaskById(id: number, user: User): Promise<void> {
+        const found = await this.getTaskById(id, user);
+        this.taskRepository.deleteTask(found);
+    }
 }
