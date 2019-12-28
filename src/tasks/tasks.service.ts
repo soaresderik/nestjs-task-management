@@ -31,11 +31,11 @@ export class TasksService {
         return found;
     }
 
-    // async updateTaskStatus(id: number, status: TaskStatus): Promise<Task> {
-    //     const task = await this.getTaskById(id);
-    //     task.status = status;
-    //     return this.taskRepository._save(task);
-    // }
+    async updateTaskStatus(id: number, status: TaskStatus, user: User): Promise<Task> {
+        const task = await this.getTaskById(id, user);
+        task.status = status;
+        return this.taskRepository._save(task);
+    }
 
     // async deleteTaskById(id: number): Promise<void> {
     //     const found = await this.getTaskById(id);
