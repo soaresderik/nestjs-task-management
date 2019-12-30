@@ -12,13 +12,13 @@ const Task = () => {
         getTasks()
     }, [])
 
-    if (!tasks.length) return <Loading />
 
     return (
         <div>
             <h1>Lista de Tarefas</h1>
             <Suspense fallback={<h1>Carregando...</h1>}>
-                { tasks.map(task => <TaskItem key={task.id} task={task} />) }
+                {!tasks.length ? <h3>Você ainda não tem nenhuma tarefa.</h3> 
+                : tasks.map(task => <TaskItem key={task.id} task={task} />) }
             </Suspense>
         </div>
     )

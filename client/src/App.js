@@ -10,7 +10,7 @@ import Home from './components/home/Home';
 import Task from './components/task/Task';
 import PrivateRoute from './components/PrivateRoute';
 import TaskState from './context/tasks/state';
-
+import Register from './components/auth/Register';
 
 
 const App = () => {
@@ -24,6 +24,7 @@ const App = () => {
                 <Switch>
                   <Route exact path="/" component={Home} />
                   <Route exact path="/login" component={Login} />
+                  <Route exact path="/cadastrar" component={Register} />
                   <PrivateRoute exact path="/tarefas" component={Task} />
                 </Switch>
               </div>

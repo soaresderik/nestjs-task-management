@@ -1,7 +1,7 @@
 import React, { useReducer } from "react"
 import AuthReducer from "./reducers";
 import { api, setAuthToken } from "../../utils/api";
-import { LOGIN_SUCCESS, LOGIN_FAIL, LOGIN_LOAD, LOGOUT } from "./types";
+import { LOGIN_SUCCESS, LOGIN_FAIL, LOGIN_LOAD, LOGOUT, SIGNUP } from "./types";
 import AuthContext from "./context";
 
 const AuthState = props => {
@@ -51,6 +51,20 @@ const AuthState = props => {
 
     const logout = async () => dispatch({ type: LOGOUT })
 
+    const signUp = async (formData) => {
+        try {
+            const res = await api.post(`/auth/signup`, formData);
+
+            dispatch({ type: SIGNUP });
+
+        } catch (err) {
+            dispatch({
+                type: LOGIN_FAIL,
+                payload: JSON.stringify(err.response.data.message || err.message)
+            })
+        }
+    }
+
     return (
         <AuthContext.Provider value={{
             token: state.token,
@@ -59,6 +73,7 @@ const AuthState = props => {
             error: state.error,
             login,
             logout,
+            signUp,
             loadUser
         }}> 
             {props.children}

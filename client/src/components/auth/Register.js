@@ -2,10 +2,10 @@ import React, { useState, useContext, useEffect } from 'react'
 import AuthContext from "../../context/auth/context";
 import Form from './Form';
 
-const Login = props => {
+const Register = (props) => {
     const authContext = useContext(AuthContext);
 
-    const { login, isAuthenticated } = authContext;
+    const { signUp, isAuthenticated } = authContext;
 
     const [user, setUser] = useState({
         username: '',
@@ -20,24 +20,31 @@ const Login = props => {
 
     }, [isAuthenticated, props.history])
 
-    const onSubmit = e => {
+    const onSubmit = async e => {
         e.preventDefault();
 
         if(username == '' || password == '') return false;
 
-        login({
-            username,
-            password
-        })
+        try {
+            await signUp({
+                username,
+                password
+            })
+
+            props.history.push('/login');
+
+        }  catch (err) {
+            return;
+        }
     }
 
     const onChange = e => setUser({...user, [e.target.name]: e.target.value });
     return (
         <div>
-            <h3>Entrar</h3>
+            <h1>Cadastre-se</h1>
             <Form onSubmit={onSubmit} onChange={onChange} />
         </div>
     )
 }
 
-export default Login
+export default Register;
