@@ -53,7 +53,7 @@ const AuthState = props => {
 
     const signUp = async (formData) => {
         try {
-            const res = await api.post(`/auth/signup`, formData);
+            await api.post(`/auth/signup`, formData);
 
             dispatch({ type: SIGNUP });
 

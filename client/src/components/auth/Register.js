@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import AuthContext from "../../context/auth/context";
 import Form from './Form';
+import { FullScreenWrapper, Heading } from '../common/styled-components';
 
 const Register = (props) => {
     const authContext = useContext(AuthContext);
@@ -40,10 +41,9 @@ const Register = (props) => {
 
     const onChange = e => setUser({...user, [e.target.name]: e.target.value });
     return (
-        <div>
-            <h1>Cadastre-se</h1>
-            <Form onSubmit={onSubmit} onChange={onChange} />
-        </div>
+        <FullScreenWrapper>
+            <Form title="Cadastre-se" onSubmit={onSubmit} onChange={onChange} />
+        </FullScreenWrapper>
     )
 }
 

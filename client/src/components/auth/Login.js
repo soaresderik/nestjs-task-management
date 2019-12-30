@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import AuthContext from "../../context/auth/context";
 import Form from './Form';
+import { Heading, FullScreenWrapper } from "../common/styled-components";
 
 const Login = props => {
     const authContext = useContext(AuthContext);
@@ -23,7 +24,7 @@ const Login = props => {
     const onSubmit = e => {
         e.preventDefault();
 
-        if(username == '' || password == '') return false;
+        if(username === '' || password === '') return false;
 
         login({
             username,
@@ -33,10 +34,9 @@ const Login = props => {
 
     const onChange = e => setUser({...user, [e.target.name]: e.target.value });
     return (
-        <div>
-            <h3>Entrar</h3>
-            <Form onSubmit={onSubmit} onChange={onChange} />
-        </div>
+        <FullScreenWrapper>
+            <Form title="Entrar" onSubmit={onSubmit} onChange={onChange} />
+        </FullScreenWrapper>
     )
 }
 
