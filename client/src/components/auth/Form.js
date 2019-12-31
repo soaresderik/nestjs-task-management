@@ -1,15 +1,8 @@
 import React from 'react'
 import styled from "styled-components";
 import { TextField, Button } from "@material-ui/core";
-import { Heading } from '../common/styled-components';
+import { Heading, FormContainer } from '../common/styled-components';
 
-
-const FormContainer = styled.form`
-    max-width: 480px;
-    width: 100%;
-    padding: 30px;
-    background-color: #edf4ff;
-`;
 
 const FormField = styled(TextField)`
     width: 100%
@@ -24,6 +17,7 @@ const Form = ({ onSubmit, onChange, title }) => (
                 label="Username" 
                 type="text" 
                 name="username" 
+                autoComplete="off"
                 onChange={onChange} 
             />
         </div>

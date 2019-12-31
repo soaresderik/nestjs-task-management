@@ -12,3 +12,10 @@ export const FullScreenWrapper = styled.div`
     align-items: center;
     justify-content: center;
 `
+
+export const FormContainer = styled.form`
+    max-width: 480px;
+    width: 100%;
+    padding: 30px;
+    background-color: #edf4ff;
+`;

@@ -11,6 +11,7 @@ import Task from './components/task/Task';
 import PrivateRoute from './components/PrivateRoute';
 import TaskState from './context/tasks/state';
 import Register from './components/auth/Register';
+import CreateTask from './components/task/CreateTask';
 
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
                   <Route exact path="/login" component={Login} />
                   <Route exact path="/cadastrar" component={Register} />
                   <PrivateRoute exact path="/tarefas" component={Task} />
+                  <PrivateRoute exact path="/tarefas/criar" component={CreateTask} />
                 </Switch>
               </div>
             </Fragment>
