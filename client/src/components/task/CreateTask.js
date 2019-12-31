@@ -33,6 +33,8 @@ const CreateTask = () => {
     return (
         <FormWrapper>
             <FormContainer>
+            <h1>Crie uma nova tarefa</h1>
+            <p>Forneça informações sobre a tarefa que você deseja completar.</p>
                 <FormControl fullWidth>
                     <TextField
                         label="Título"

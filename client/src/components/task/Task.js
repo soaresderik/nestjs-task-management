@@ -1,5 +1,6 @@
 import React, { useEffect, useContext } from 'react'
 import { Fab } from "@material-ui/core";
+import { Add } from "@material-ui/icons";
 import styled from "styled-components";
 
 import TaskContext from "../../context/tasks/context";
@@ -41,7 +42,8 @@ const Task = (props) => {
                     variant="extended"
                     onClick={() => props.history.push('/tarefas/criar')}
                 >
-
+                    <Add />
+                    Criar Tarefa
                 </Fab>
             </CreateButtonContainer>
             {!tasks.length ? <h3>Você ainda não tem nenhuma tarefa.</h3> 
