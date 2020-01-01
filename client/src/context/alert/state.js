@@ -1,10 +1,10 @@
 import React, { useReducer } from "react"
 import alertReducer from "./reducers";
-import TaskContext from "./context";
+import AlertContext from "./context";
 import uuid from "uuid";
 import { SET_ALERT, REMOVE_ALERT } from "./types";
 
-const TaskState = props => {
+const AlertState = props => {
     const initialState = []
 
     const [state, dispatch] = useReducer(alertReducer, initialState);
@@ -18,13 +18,13 @@ const TaskState = props => {
     }
 
     return (
-        <TaskContext.Provider value={{
+        <AlertContext.Provider value={{
             alerts: state,
             setAlert
         }}> 
             {props.children}
-        </TaskContext.Provider>
+        </AlertContext.Provider>
     )
 }
 
-export default TaskState;
+export default AlertState;

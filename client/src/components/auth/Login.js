@@ -1,16 +1,19 @@
 import React, { useState, useContext, useEffect } from 'react'
 import AuthContext from "../../context/auth/context";
+import AlertContext from "../../context/alert/context";
 import Form from './Form';
-import { Heading, FullScreenWrapper } from "../common/styled-components";
+import { FullScreenWrapper } from "../common/styled-components";
 
 const Login = props => {
     const authContext = useContext(AuthContext);
+    const alertContext = useContext(AlertContext);
 
     const { login, isAuthenticated } = authContext;
+    const { setAlert } = alertContext;
 
     const [user, setUser] = useState({
         username: '',
-        password: ''
+        password: '',
     });
 
     const { username, password } = user;
@@ -24,7 +27,10 @@ const Login = props => {
     const onSubmit = e => {
         e.preventDefault();
 
-        if(username === '' || password === '') return false;
+        if (username === '' || password === '') {
+            setAlert("Nome e senha são obrigatórios!" );
+            return;
+        }
 
         login({
             username,
