@@ -1,7 +1,8 @@
 
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { FormControl, TextField, Button } from "@material-ui/core";
 import { FormContainer } from '../common/styled-components';
+import TaskContext from "../../context/tasks/context";
 import styled from "styled-components";
 
 
@@ -13,7 +14,10 @@ const FormWrapper = styled.div`
   justify-content: center;
 `;
 
-const CreateTask = () => {
+const CreateTask = (props) => {
+    const taskContext = useContext(TaskContext);
+
+    const { createTask } = taskContext;
 
     const [task, setTask] = useState({
         title: '',
@@ -27,6 +31,11 @@ const CreateTask = () => {
     const onSubmit = e => {
         e.preventDefault();
 
+        if(title === '' || description === '') return false;
+
+        createTask({ title, description });
+
+        props.history.push('/tarefas');
         return;
     }
 

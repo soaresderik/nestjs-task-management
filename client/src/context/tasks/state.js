@@ -1,7 +1,7 @@
 import React, { useReducer } from "react"
 import TaskReducer from "./reducers";
 import { api } from "../../utils/api";
-import { GET_TASKS, TASK_ERROR } from "./types";
+import { GET_TASKS, TASK_ERROR, CREATE_TASK } from "./types";
 import TaskContext from "./context";
 
 const TaskState = props => {
@@ -28,11 +28,28 @@ const TaskState = props => {
         }
     }
 
+    const createTask = async formData => {
+        try {
+            const res = await api.post('/tasks', formData);
+
+            dispatch({ 
+                type: CREATE_TASK,
+                payload: res.data
+            })
+        } catch (err) {
+            dispatch({
+                type: TASK_ERROR,
+                payload: err.response.msg
+            })
+        }
+    }
+
     return (
         <TaskContext.Provider value={{
             tasks: state.tasks,
             loading: state.loading,
-            getTasks
+            getTasks,
+            createTask
         }}> 
             {props.children}
         </TaskContext.Provider>

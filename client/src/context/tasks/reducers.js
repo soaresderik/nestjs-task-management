@@ -1,4 +1,4 @@
-import { GET_TASKS } from "./types";
+import { GET_TASKS, CREATE_TASK } from "./types";
 
 
 export default (state, action) => {
@@ -7,6 +7,11 @@ export default (state, action) => {
             return {
                 ...state,
                 tasks: [...action.payload]
+            }
+        case CREATE_TASK:
+            return {
+                ...state,
+                tasks: [...state.tasks, action.payload]
             }
         
         default:

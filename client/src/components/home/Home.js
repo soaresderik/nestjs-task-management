@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, Fragment } from 'react'
-import { AppBar, Button, Toolbar, IconButton, Typography, MenuIcon } from "@material-ui/core";
+import { AppBar, Button, Toolbar} from "@material-ui/core";
 import { Link } from 'react-router-dom';
 import AuthContext from "../../context/auth/context";
 import styled from "styled-components";
@@ -58,6 +58,7 @@ const Home = () => {
     return (
         <div>
             <h1>Bem Vindo ao Gerenciador de Tarefas!</h1>
+            <h3>Para ver suas tarefas <Link to="/tarefas">clique aqui</Link></h3>
         </div>
     )
 }
