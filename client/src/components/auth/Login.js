@@ -8,7 +8,7 @@ const Login = props => {
     const authContext = useContext(AuthContext);
     const alertContext = useContext(AlertContext);
 
-    const { login, isAuthenticated } = authContext;
+    const { login, isAuthenticated, error } = authContext;
     const { setAlert } = alertContext;
 
     const [user, setUser] = useState({
@@ -22,7 +22,9 @@ const Login = props => {
         if(isAuthenticated)
             props.history.push('/tarefas');
 
-    }, [isAuthenticated, props.history])
+        if(error) setAlert(error);
+
+    }, [isAuthenticated, props.history, error])
 
     const onSubmit = e => {
         e.preventDefault();
@@ -35,7 +37,7 @@ const Login = props => {
         login({
             username,
             password
-        })
+        })      
     }
 
     const onChange = e => setUser({...user, [e.target.name]: e.target.value });
