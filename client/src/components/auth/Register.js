@@ -2,9 +2,11 @@ import React, { useState, useContext, useEffect } from 'react'
 import AuthContext from "../../context/auth/context";
 import Form from './Form';
 import { FullScreenWrapper, Heading } from '../common/styled-components';
+import { useSnackbar } from "notistack";
 
 const Register = (props) => {
     const authContext = useContext(AuthContext);
+    const { enqueueSnackbar } = useSnackbar();
 
     const { signUp, isAuthenticated } = authContext;
 
@@ -24,7 +26,13 @@ const Register = (props) => {
     const onSubmit = async e => {
         e.preventDefault();
 
-        if(username == '' || password == '') return false;
+        if(username == '' || password == '') {
+
+            enqueueSnackbar("Usuário e senha são obrigatórios!", {
+                variant: 'error'
+            });
+            return;
+        };
 
         try {
             await signUp({

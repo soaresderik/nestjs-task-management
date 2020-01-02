@@ -14,8 +14,6 @@ import Task from './components/task/Task';
 import PrivateRoute from './components/PrivateRoute';
 import Register from './components/auth/Register';
 import CreateTask from './components/task/CreateTask';
-import Error from './components/common/Error';
-
 
 const App = () => {
     return (
