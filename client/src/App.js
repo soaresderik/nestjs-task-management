@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { SnackbarProvider } from "notistack";
 import './App.css';
 
 import AuthState from './context/auth/state';
@@ -13,6 +14,7 @@ import Task from './components/task/Task';
 import PrivateRoute from './components/PrivateRoute';
 import Register from './components/auth/Register';
 import CreateTask from './components/task/CreateTask';
+import Error from './components/common/Error';
 
 
 const App = () => {
@@ -20,6 +22,12 @@ const App = () => {
       <AlertState>
         <AuthState>
           <TaskState>
+            <SnackbarProvider
+               anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right',
+              }}
+            >
             <Router>
               <Fragment>
                 <Navbar />
@@ -34,6 +42,7 @@ const App = () => {
                 </div>
               </Fragment>
             </Router>
+            </SnackbarProvider>
           </TaskState>
         </AuthState>
       </AlertState>

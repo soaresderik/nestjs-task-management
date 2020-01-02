@@ -1,15 +1,14 @@
 import React, { useState, useContext, useEffect } from 'react'
 import AuthContext from "../../context/auth/context";
-import AlertContext from "../../context/alert/context";
 import Form from './Form';
 import { FullScreenWrapper } from "../common/styled-components";
+import { useSnackbar } from "notistack";
 
 const Login = props => {
     const authContext = useContext(AuthContext);
-    const alertContext = useContext(AlertContext);
+    const { enqueueSnackbar } = useSnackbar();
 
     const { login, isAuthenticated, error } = authContext;
-    const { setAlert } = alertContext;
 
     const [user, setUser] = useState({
         username: '',
@@ -22,7 +21,9 @@ const Login = props => {
         if(isAuthenticated)
             props.history.push('/tarefas');
 
-        if(error) setAlert(error);
+        if(error) enqueueSnackbar(error, {
+            variant: 'error',
+        });
 
     }, [isAuthenticated, props.history, error])
 
@@ -30,7 +31,9 @@ const Login = props => {
         e.preventDefault();
 
         if (username === '' || password === '') {
-            setAlert("Nome e senha são obrigatórios!" );
+            enqueueSnackbar("Nome e senha são obrigatórios!", {
+                variant: 'error',
+            });
             return;
         }
 

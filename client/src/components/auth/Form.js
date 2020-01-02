@@ -19,7 +19,7 @@ const Form = ({ onSubmit, onChange, title }) => {
     return (
         <FormContainer onSubmit={onSubmit}>
             <Heading>{title}</Heading>
-            { !!alerts.length && alerts.map( err => <Error msg={err.msg} />) }
+            { !!alerts.length && alerts.map( (err, index) => <Error key={index} msg={err.msg} />) }
             <div>
                 <FormField 
                     id="outlined-name" 

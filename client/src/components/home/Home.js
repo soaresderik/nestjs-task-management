@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, Fragment } from 'react'
-import { AppBar, Button, Toolbar} from "@material-ui/core";
+import { AppBar, Button, Toolbar } from "@material-ui/core";
 import { Link } from 'react-router-dom';
 import AuthContext from "../../context/auth/context";
 import styled from "styled-components";
@@ -15,7 +15,6 @@ const StyledLink = styled(Link)`
 
 export const Navbar = () => {
     const authContext = useContext(AuthContext);
-
     const { loadUser, logout, isAuthenticated } = authContext;
 
     const onLogout = () => {
