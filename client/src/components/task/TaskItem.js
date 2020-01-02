@@ -11,7 +11,15 @@ const TaskContainer = styled.div`
     padding-top: 20px;
 `
 
-const TaskItem = ({ task }) => {
+const TaskItem = ({ task, deleteTask }) => {
+
+    const handleDelete = id => {
+        if (!(window.confirm("Deseja Realmente excluir essa tarefa?")))
+            return false;
+        
+        deleteTask(id);
+    }
+
     return (
         <TaskContainer>
         <Card>
@@ -35,7 +43,7 @@ const TaskItem = ({ task }) => {
                     </Grid>
 
                     <Grid item>
-                        <IconButton>
+                        <IconButton onClick={() => handleDelete(task.id)}>
                             <Delete color="error" />
                         </IconButton>
                     </Grid>

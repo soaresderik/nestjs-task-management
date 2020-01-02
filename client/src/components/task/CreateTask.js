@@ -1,5 +1,5 @@
 
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { FormControl, TextField, Button } from "@material-ui/core";
 import { FormContainer } from '../common/styled-components';
 import TaskContext from "../../context/tasks/context";
@@ -24,20 +24,23 @@ const CreateTask = (props) => {
         description: ''
     });
 
+    const [sendRequest, setSend ] = useState(false);
+
+    useEffect(() => {
+        if (sendRequest){
+            if(title === '' || description === '') return false;
+
+            createTask({ title, description });
+
+            setSend(false);
+            props.history.push('/tarefas');
+        }
+
+    }, [sendRequest])
+
     const { title, description } = task;
 
     const onChange = e => setTask({...task, [e.target.name]: e.target.value });
-
-    const onSubmit = e => {
-        e.preventDefault();
-
-        if(title === '' || description === '') return false;
-
-        createTask({ title, description });
-
-        props.history.push('/tarefas');
-        return;
-    }
 
     return (
         <FormWrapper>
@@ -70,7 +73,8 @@ const CreateTask = (props) => {
                     fullWidth
                     variant="contained"
                     color="primary"
-                    onClick={onSubmit}
+                    disabled={sendRequest}
+                    onClick={() => setSend(true)}
                 >
                     CRIAR
                 </Button>

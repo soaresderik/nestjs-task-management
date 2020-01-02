@@ -25,7 +25,7 @@ const CreateButtonContainer = styled.div`
 const Task = (props) => {
     const taskContext = useContext(TaskContext);
 
-    const { getTasks, tasks } = taskContext;
+    const { getTasks, tasks, deleteTask } = taskContext;
 
     useEffect(() => {
         getTasks()
@@ -46,7 +46,12 @@ const Task = (props) => {
             </CreateButtonContainer>
             
                 {!tasks.length ? <h3>Você ainda não tem nenhuma tarefa.</h3> 
-                : tasks.map(task => <TaskItem key={task.id} task={task} />) }
+                : tasks.map(task => (
+                    <TaskItem 
+                        key={task.id} 
+                        task={task} 
+                        deleteTask={deleteTask} />)
+                ) }
             
         </TaskWrapper>
     )

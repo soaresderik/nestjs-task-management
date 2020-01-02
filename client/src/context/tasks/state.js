@@ -1,7 +1,7 @@
 import React, { useReducer } from "react"
 import TaskReducer from "./reducers";
 import { api } from "../../utils/api";
-import { GET_TASKS, TASK_ERROR, CREATE_TASK } from "./types";
+import { GET_TASKS, TASK_ERROR, CREATE_TASK, DELETE_TASK } from "./types";
 import TaskContext from "./context";
 
 const TaskState = props => {
@@ -44,12 +44,29 @@ const TaskState = props => {
         }
     }
 
+    const deleteTask = async (id) => {
+        try {
+            await api.delete(`tasks/${id}`);
+
+            dispatch({
+                type: DELETE_TASK,
+                payload: id
+            });
+        } catch (err) {
+            dispatch({
+                type: TASK_ERROR,
+                payload: err.response.msg
+            });
+        }
+    };
+
     return (
         <TaskContext.Provider value={{
             tasks: state.tasks,
             loading: state.loading,
             getTasks,
-            createTask
+            createTask,
+            deleteTask
         }}> 
             {props.children}
         </TaskContext.Provider>

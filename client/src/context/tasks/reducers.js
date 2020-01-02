@@ -1,4 +1,4 @@
-import { GET_TASKS, CREATE_TASK } from "./types";
+import { GET_TASKS, CREATE_TASK, DELETE_TASK } from "./types";
 
 
 export default (state, action) => {
@@ -12,6 +12,11 @@ export default (state, action) => {
             return {
                 ...state,
                 tasks: [...state.tasks, action.payload]
+            }
+        case DELETE_TASK:
+            return {
+                ...state,
+                tasks: state.tasks.filter(t => t.id !== action.payload)
             }
         
         default:
