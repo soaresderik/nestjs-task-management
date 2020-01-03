@@ -5,3 +5,12 @@ services:
         build: './backend'
         ports:
             - '8000:8000'
+    
+    client:
+        build: './client'
+        ports:
+            - '8001:8001'
+        environment: 
+            API_URL: http://backend:8000
+        depends_on: 
+            - backend

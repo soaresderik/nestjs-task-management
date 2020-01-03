@@ -58,6 +58,7 @@ const Home = () => {
         <div>
             <h1>Bem Vindo ao Gerenciador de Tarefas!</h1>
             <h3>Para ver suas tarefas <Link to="/tarefas">clique aqui</Link></h3>
+            <small>Backend rodando em: { window.process.env.API_URL || "localhost:3000" }</small>
         </div>
     )
 }
