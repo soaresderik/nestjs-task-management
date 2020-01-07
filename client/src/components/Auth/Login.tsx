@@ -1,7 +1,7 @@
 import * as React from "react";
 import Form from "./Form";
 import { useDispatch, useSelector } from "react-redux";
-import { signIn } from "../../store/auth/auth.actions";
+import { signIn, loadUser } from "../../store/auth/auth.actions";
 import { AuthState } from "../../store/interfaces";
 import { FullScreenWrapper } from "../Common/styled-components";
 
@@ -21,6 +21,7 @@ const Login = (props: any) => {
     React.useEffect(() => {
         if (isAuthenticated) props.history.push("/tarefas");
 
+        dispatch(loadUser());
         // if(error) enqueueSnackbar(error, {
         //     variant: 'error',
         // });

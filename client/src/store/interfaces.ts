@@ -16,13 +16,13 @@ export interface TaskAction {
 }
 
 export enum TaskType {
-    ADD_TASK = "ADD_TASK",
+    ADD_TASK = "ADD_TASK"
 }
 
 export enum TaskStatus {
     OPEN = "OPEN",
     IN_PROGRESS = "IN_PROGRESS",
-    DONE = "DONE",
+    DONE = "DONE"
 }
 
 /** Auth */
@@ -40,4 +40,5 @@ export interface AuthAction {
 export enum AuthType {
     SIGN_IN = "SIGN_IN",
     SIGN_UP = "SIGN_UP",
+    LOGOUT = "LOGOUT"
 }

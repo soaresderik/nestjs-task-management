@@ -1,9 +1,10 @@
 import BaseHttpService from "./base-http.service";
-import { IAuthenticate } from "./interfaces";
+import { IAuthenticate, AuthResponse } from "./interfaces";
 
 class AuthService extends BaseHttpService {
-    async signIn(data: IAuthenticate) {
-        return await this.post("auth/signin", data);
+    async signIn(data: IAuthenticate): Promise<AuthResponse> {
+        const response = await this.post("auth/signin", data);
+        return response.data;
     }
 }
 

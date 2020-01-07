@@ -2,7 +2,7 @@ import { AuthState, AuthType, AuthAction } from "../interfaces";
 
 const initialState: AuthState = {
     token: null,
-    isAuthenticated: false,
+    isAuthenticated: false
 };
 
 const authStore = (state = initialState, action: AuthAction): AuthState => {
@@ -11,7 +11,13 @@ const authStore = (state = initialState, action: AuthAction): AuthState => {
             return {
                 ...state,
                 token: action.payload,
-                isAuthenticated: true,
+                isAuthenticated: true
+            };
+        case AuthType.LOGOUT:
+            return {
+                ...state,
+                token: null,
+                isAuthenticated: false
             };
         default:
             return state;
