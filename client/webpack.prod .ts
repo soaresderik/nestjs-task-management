@@ -19,10 +19,14 @@ const config: webpack.Configuration = {
     },
     module: {
         rules: [
-            { test: /\.tsx?$/, loader: "awesome-typescript-loader" }
+            { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
+            {
+                test: /\.css$/i,
+                use: ["style-loader", "css-loader"]
+            }
         ]
     },
     plugins: [htmlPlugin]
-}
+};
 
 export default config;

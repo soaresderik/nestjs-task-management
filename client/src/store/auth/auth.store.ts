@@ -5,7 +5,7 @@ const initialState: AuthState = {
     isAuthenticated: false,
 };
 
-const authStore = (state = initialState, action: AuthAction) => {
+const authStore = (state = initialState, action: AuthAction): AuthState => {
     switch (action.type) {
         case AuthType.SIGN_IN:
             return {

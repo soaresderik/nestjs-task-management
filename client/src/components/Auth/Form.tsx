@@ -1,29 +1,49 @@
 import * as React from "react";
-import { TextField, Button } from "@material-ui/core";
+import { Button } from "@material-ui/core";
+import styled from "styled-components";
+import { FormField, Heading } from "../Common/styled-components";
+
+const FormContainer = styled.form`
+    max-width: 480px;
+    width: 100%;
+    padding: 30px;
+    background-color: #edf4ff;
+`;
 
 interface FormProp {
     title: string;
+    subtitle: string;
+    footer: string;
     onSubmit: (e: any) => void;
     onChange: (e: any) => void;
+    onClick: (e: any) => void;
 }
 
-const Form = ({ title, onSubmit, onChange }: FormProp) => {
-
+const Form = ({
+    title,
+    subtitle,
+    onSubmit,
+    onChange,
+    footer,
+    onClick
+}: FormProp) => {
     return (
-        <form onSubmit={onSubmit}>
-            <h2>{title}</h2>
+        <FormContainer onSubmit={onSubmit}>
+            <Heading>{title}</Heading>
+            <p>{subtitle}</p>
             <div>
-                <TextField
+                <FormField
                     id="outlined-name"
-                    label="Username"
+                    label="Usuário"
                     type="text"
                     name="username"
+                    margin="dense"
                     autoComplete="off"
                     onChange={onChange}
                 />
             </div>
             <div>
-                <TextField
+                <FormField
                     id="outlined-name"
                     label="Senha"
                     type="password"
@@ -31,16 +51,23 @@ const Form = ({ title, onSubmit, onChange }: FormProp) => {
                     onChange={onChange}
                 />
             </div>
-            <br/>
+            <br />
             <div>
                 <Button
                     fullWidth
                     type="submit"
                     color="primary"
                     variant="contained"
-                >Entrar</Button>
+                >
+                    Entrar
+                </Button>
             </div>
-        </form>
+            <div>
+                <Button fullWidth onClick={onClick}>
+                    {footer}
+                </Button>
+            </div>
+        </FormContainer>
     );
 };
 
