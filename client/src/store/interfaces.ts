@@ -1,44 +1,45 @@
 /** Task */
 export interface ITask {
-    id: number;
-    title: string;
-    description: string;
-    status: TaskStatus;
+  id: number;
+  title: string;
+  description: string;
+  status: TaskStatus;
 }
 
 export interface TaskState {
-    tasks: ITask[];
+  tasks: ITask[];
 }
 
 export interface TaskAction {
-    type: TaskType;
-    payload: ITask[] | any;
+  type: TaskType;
+  payload: ITask[] | any;
 }
 
 export enum TaskType {
-    ADD_TASK = "ADD_TASK"
+  ADD_TASK = "ADD_TASK",
+  GET_TASKS = "GET_TASKS"
 }
 
 export enum TaskStatus {
-    OPEN = "OPEN",
-    IN_PROGRESS = "IN_PROGRESS",
-    DONE = "DONE"
+  OPEN = "OPEN",
+  IN_PROGRESS = "IN_PROGRESS",
+  DONE = "DONE"
 }
 
 /** Auth */
 
 export interface AuthState {
-    token: string | null;
-    isAuthenticated: boolean;
+  token: string | null;
+  isAuthenticated: boolean;
 }
 
 export interface AuthAction {
-    type: AuthType;
-    payload: any;
+  type: AuthType;
+  payload: any;
 }
 
 export enum AuthType {
-    SIGN_IN = "SIGN_IN",
-    SIGN_UP = "SIGN_UP",
-    LOGOUT = "LOGOUT"
+  SIGN_IN = "SIGN_IN",
+  SIGN_UP = "SIGN_UP",
+  LOGOUT = "LOGOUT"
 }
