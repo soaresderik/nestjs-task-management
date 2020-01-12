@@ -11,9 +11,22 @@ const taskStore = (state = initialState, action: TaskAction) => {
         ...state,
         tasks: [...state.tasks, action.payload]
       };
+    case TaskType.UPDATE_TASK:
+      return {
+        ...state,
+        tasks: [
+          ...state.tasks.filter(task => task.id !== action.payload.id),
+          action.payload
+        ]
+      };
     case TaskType.GET_TASKS:
       return {
         tasks: [...action.payload]
+      };
+    case TaskType.REMOVE_TASK:
+      return {
+        ...state,
+        tasks: state.tasks.filter(task => task.id !== action.payload)
       };
     default:
       return state;

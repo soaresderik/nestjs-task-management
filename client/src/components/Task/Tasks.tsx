@@ -5,10 +5,11 @@ import { Add, ExitToApp } from "@material-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/auth/auth.actions";
 import { GlobalProp } from "../interfaces";
-import { TaskState } from "../../store/interfaces";
+import { TaskState, TaskStatus } from "../../store/interfaces";
 
 import Filter from "./Filter";
 import TaskItem from "./TaskItem";
+import { deleteTask, updateTask } from "../../store/tasks/tasks.actions";
 
 const Tasks: React.FC<GlobalProp> = props => {
   const tasks = useSelector((state: any) => state.tasks) as TaskState;
@@ -16,6 +17,14 @@ const Tasks: React.FC<GlobalProp> = props => {
 
   const onClick = () => {
     dispatch(logout());
+  };
+
+  const onDelete = async (id: number) => {
+    dispatch(await deleteTask(id));
+  };
+
+  const onUpdate = async (id: number, status: TaskStatus) => {
+    dispatch(await updateTask(id, status));
   };
 
   return (
@@ -43,7 +52,12 @@ const Tasks: React.FC<GlobalProp> = props => {
 
       <TasksContainer>
         {tasks.tasks.map(task => (
-          <TaskItem key={task.id} task={task} />
+          <TaskItem
+            key={task.id}
+            task={task}
+            onDelete={onDelete}
+            onUpdate={onUpdate}
+          />
         ))}
       </TasksContainer>
     </TasksWrapper>

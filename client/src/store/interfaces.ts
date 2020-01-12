@@ -17,7 +17,9 @@ export interface TaskAction {
 
 export enum TaskType {
   ADD_TASK = "ADD_TASK",
-  GET_TASKS = "GET_TASKS"
+  GET_TASKS = "GET_TASKS",
+  UPDATE_TASK = "UPDATE_TASK",
+  REMOVE_TASK = "REMOVE_TASK"
 }
 
 export enum TaskStatus {

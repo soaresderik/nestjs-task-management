@@ -24,9 +24,15 @@ const CardTitle = styled.h1`
 
 interface IProp {
   task: ITask;
+  onDelete: (id: number) => Promise<void>;
+  onUpdate: (id: number, status: TaskStatus) => Promise<void>;
 }
 
-const TaskItem: React.FC<IProp> = ({ task }) => {
+const TaskItem: React.FC<IProp> = ({ task, onDelete, onUpdate }) => {
+  const onChange = (e: any) => {
+    onUpdate(task.id, e.target.value);
+  };
+
   return (
     <CardContainer>
       <Card>
@@ -41,7 +47,7 @@ const TaskItem: React.FC<IProp> = ({ task }) => {
           >
             <Grid item>
               <FormControl>
-                <Select value={task.status}>
+                <Select value={task.status} onChange={onChange}>
                   <MenuItem value={TaskStatus.OPEN}>Aberta</MenuItem>
                   <MenuItem value={TaskStatus.IN_PROGRESS}>
                     Em Progresso
@@ -52,7 +58,7 @@ const TaskItem: React.FC<IProp> = ({ task }) => {
             </Grid>
 
             <Grid item>
-              <IconButton>
+              <IconButton onClick={() => onDelete(task.id)}>
                 <Delete color="error" />
               </IconButton>
             </Grid>
