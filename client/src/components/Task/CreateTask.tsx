@@ -4,6 +4,7 @@ import {
   FormContainer,
   Header
 } from "../Common/styled-components";
+import { useSnackbar } from "notistack";
 import { FormControl, TextField, Button } from "@material-ui/core";
 import { GlobalProp } from "../interfaces";
 import { useDispatch } from "react-redux";
@@ -11,6 +12,7 @@ import { createTask } from "../../store/tasks/tasks.actions";
 
 const CreateTask: React.FC<GlobalProp> = props => {
   const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
   const [task, setTask] = React.useState({
     title: "",
     description: ""
@@ -22,7 +24,13 @@ const CreateTask: React.FC<GlobalProp> = props => {
     setTask({ ...task, [e.target.name]: e.target.value });
 
   const onSubmit = async (e: any) => {
-    if (!title.length || !description.length) return;
+    if (!title.length || !description.length) {
+      enqueueSnackbar("Título e descrição são obrigatórios", {
+        variant: "error"
+      });
+
+      return;
+    }
 
     dispatch(await createTask(title, description));
 
