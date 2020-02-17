@@ -2,28 +2,32 @@ import * as React from "react";
 import styled from "styled-components";
 import { IconButton, Fab } from "@material-ui/core";
 import { Add, ExitToApp } from "@material-ui/icons";
-import { useDispatch, useSelector } from "react-redux";
+import { observer } from "mobx-react-lite";
 import { GlobalProp } from "../interfaces";
-import { TaskState, TaskStatus } from "../../store/interfaces";
+import { TaskStatus } from "../store/interfaces";
 
-import Filter from "./Filter";
+// import Filter from "./Filter";
 import TaskItem from "./TaskItem";
-import { deleteTask, updateTask } from "../../store/tasks/tasks.actions";
+import { useStore } from "../store/context";
 
-const Tasks: React.FC<GlobalProp> = props => {
-  const tasks = useSelector((state: any) => state.tasks) as TaskState;
-  const dispatch = useDispatch();
+const Tasks: React.FC<GlobalProp> = observer(props => {
+  const { taskStore, userStore } = useStore();
+  const { getTasks } = taskStore;
 
-  const onClick = () => {
-    // dispatch(logout());
-  };
+  React.useEffect(() => {
+    const fetchTasks = async () => {
+      await getTasks({});
+    }
+    fetchTasks();
+  }, [getTasks]);
+
 
   const onDelete = async (id: number) => {
-    dispatch(await deleteTask(id));
+    await taskStore.deleteTask(id);
   };
 
   const onUpdate = async (id: number, status: TaskStatus) => {
-    dispatch(await updateTask(id, status));
+    // dispatch(await updateTask(id, status));
   };
 
   return (
@@ -33,7 +37,7 @@ const Tasks: React.FC<GlobalProp> = props => {
         <CreateButtonContainer>
           <Fab
             variant="extended"
-            onClick={() => props.history.push("/tarefas/criar")}
+            onClick={() => props.history?.push("/tasks/create")}
           >
             <Add />
             Criar
@@ -41,16 +45,16 @@ const Tasks: React.FC<GlobalProp> = props => {
         </CreateButtonContainer>
 
         <SignOutIconContainer>
-          <IconButton onClick={onClick}>
+          <IconButton onClick={() => userStore.logout() }>
             <ExitToApp />
           </IconButton>
         </SignOutIconContainer>
       </TaskHeader>
-
-      <Filter />
+{/* 
+      <Filter /> */}
 
       <TasksContainer>
-        {tasks.tasks.map(task => (
+        {taskStore.tasks.map(task => (
           <TaskItem
             key={task.id}
             task={task}
@@ -61,7 +65,7 @@ const Tasks: React.FC<GlobalProp> = props => {
       </TasksContainer>
     </TasksWrapper>
   );
-};
+});
 
 const TasksWrapper = styled.div`
   width: 100%;

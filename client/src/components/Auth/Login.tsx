@@ -1,14 +1,11 @@
 import * as React from "react";
 import Form from "./Form";
-import { useDispatch, useSelector } from "react-redux";
-import { signIn, loadUser } from "../../store/auth/auth.actions";
+import { useSelector } from "react-redux";
 import { AuthState } from "../../store/interfaces";
 import { FullScreenWrapper } from "../Common/styled-components";
-import { useSnackbar } from "notistack";
+
 
 const Login = (props: any) => {
-  const dispatch = useDispatch();
-  const { enqueueSnackbar } = useSnackbar();
   const { isAuthenticated, error } = useSelector(
     (state: any) => state.auth
   ) as AuthState;
@@ -21,29 +18,29 @@ const Login = (props: any) => {
   const { username, password } = user;
 
   React.useEffect(() => {
-    if (isAuthenticated) props.history.push("/tarefas");
+    // if (isAuthenticated) props.history.push("/tarefas");
 
-    dispatch(loadUser());
+    // dispatch(loadUser());
 
-    if (error)
-      enqueueSnackbar(error, {
-        variant: "error"
-      });
+    // if (error)
+    //   enqueueSnackbar(error, {
+    //     variant: "error"
+    //   });
   }, [isAuthenticated, error]);
 
   const onSubmit = async (e: any) => {
-    e.preventDefault();
+    // e.preventDefault();
 
-    if (username === "" || password === "") {
-      enqueueSnackbar("Nome e senha são obrigatórios", {
-        variant: "error"
-      });
+    // if (username === "" || password === "") {
+    //   enqueueSnackbar("Nome e senha são obrigatórios", {
+    //     variant: "error"
+    //   });
 
-      return;
-    }
+    //   return;
+    // }
 
-    dispatch(await signIn({ username, password }));
-    return;
+    // dispatch(await signIn({ username, password }));
+    // return;
   };
 
   const onChange = (e: any) =>
